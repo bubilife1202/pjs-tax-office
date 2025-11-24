@@ -89,62 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== 네이버 지도 초기화 =====
-    // 네이버 지도 API 사용을 위해서는 ncpClientId가 필요합니다
-    // index.html의 스크립트 태그에서 YOUR_CLIENT_ID를 실제 클라이언트 ID로 교체해야 합니다
-
-    function initMap() {
-        if (typeof naver !== 'undefined' && naver.maps) {
-            const mapOptions = {
-                center: new naver.maps.LatLng(37.7556, 128.8961), // 강릉대로 116 좌표 (대략적)
-                zoom: 17,
-                zoomControl: true,
-                zoomControlOptions: {
-                    style: naver.maps.ZoomControlStyle.SMALL,
-                    position: naver.maps.Position.TOP_RIGHT
-                }
-            };
-
-            const map = new naver.maps.Map('map', mapOptions);
-
-            // 마커 추가
-            const marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng(37.7556, 128.8961),
-                map: map,
-                title: '박종수 세무회계사무소'
-            });
-
-            // 정보창 추가
-            const infoWindow = new naver.maps.InfoWindow({
-                content: '<div style="padding:10px;font-size:14px;"><strong>박종수 세무회계사무소</strong><br>강원 강릉시 강릉대로 116, 3층</div>'
-            });
-
-            // 마커 클릭 시 정보창 표시
-            naver.maps.Event.addListener(marker, 'click', function() {
-                if (infoWindow.getMap()) {
-                    infoWindow.close();
-                } else {
-                    infoWindow.open(map, marker);
-                }
-            });
-
-            // 초기 정보창 표시
-            infoWindow.open(map, marker);
-        } else {
-            // 네이버 지도 API가 로드되지 않은 경우 대체 컨텐츠 표시
-            const mapElement = document.getElementById('map');
-            if (mapElement) {
-                mapElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#6c757d;text-align:center;padding:20px;">지도를 불러오는 중입니다...<br><small>네이버 지도 API 키가 필요합니다.</small></div>';
-            }
-        }
-    }
-
-    // 페이지 로드 후 지도 초기화
-    if (document.getElementById('map')) {
-        // 네이버 지도 스크립트가 로드될 때까지 대기
-        setTimeout(initMap, 500);
-    }
-
     // ===== Scroll Reveal Animation =====
     const observerOptions = {
         threshold: 0.1,

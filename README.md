@@ -21,9 +21,9 @@
 
 - **HTML5**: 시맨틱 마크업
 - **CSS3**: 반응형 디자인, 애니메이션
-- **JavaScript**: 인터랙션, 네이버 지도 연동
+- **JavaScript**: 인터랙션 및 사용자 경험 개선
 - **Netlify Forms**: 서버 없이 문의 폼 처리
-- **Naver Maps API**: 위치 지도 표시
+- **네이버 지도 iframe**: API 키 없이 간편하게 지도 표시
 
 ## 📦 프로젝트 구조
 
@@ -66,28 +66,18 @@ Netlify Forms는 자동으로 활성화됩니다:
 - 폼 제출 시 Netlify 대시보드에서 확인 가능
 - 이메일 알림 설정: Site settings → Forms → Form notifications
 
-## 🗺️ 네이버 지도 API 설정
+## 🗺️ 지도 설정
 
-1. **네이버 클라우드 플랫폼에서 API 키 발급**
-   - [네이버 클라우드 플랫폼](https://www.ncloud.com/) 접속
-   - "Console" → "Services" → "AI·NAVER API" → "Maps"
-   - "Application 등록" 클릭
-   - Web Dynamic Map 선택
-   - 웹 서비스 URL 등록
+현재 네이버 지도는 **iframe 방식**으로 구현되어 있어 별도의 API 키 발급이나 설정이 필요 없습니다.
 
-2. **index.html 수정**
-   ```html
-   <!-- 155번째 줄 근처 -->
-   <script type="text/javascript"
-           src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID">
-   </script>
-   ```
-   `YOUR_CLIENT_ID`를 발급받은 클라이언트 ID로 교체
+- **장점**: API 키 불필요, 무료, 바로 사용 가능
+- **기능**: 네이버 지도의 모든 기능(확대/축소, 길찾기 등) 자동 제공
+- **수정 방법**: `index.html`의 iframe src URL을 변경하여 다른 위치로 변경 가능
 
-3. **좌표 정확도 향상 (선택사항)**
-   - script.js의 37, 46, 53번째 줄에서 좌표 수정
-   - [네이버 지도](https://map.naver.com/)에서 "강원 강릉시 강릉대로 116" 검색
-   - 정확한 위도/경도 확인 후 수정
+더 정확한 위치를 표시하고 싶다면:
+1. [네이버 지도](https://map.naver.com/)에서 원하는 위치 검색
+2. "공유" 버튼 클릭 → "HTML 태그" 복사
+3. `index.html`의 iframe 태그 교체
 
 ## 📝 커스터마이징 가이드
 
