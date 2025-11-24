@@ -1,5 +1,5 @@
-// ===== Mobile Menu Toggle =====
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== Mobile Menu Toggle =====
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
         });
 
-        // 메뉴 항목 클릭 시 메뉴 닫기
         const navLinks = document.querySelectorAll('.nav-menu a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // 외부 클릭 시 메뉴 닫기
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
                 navMenu.classList.remove('active');
@@ -27,71 +25,75 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== Smooth Scrolling =====
-    const scrollLinks = document.querySelectorAll('a[href^="#"]');
-    scrollLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-
-            // #만 있는 경우 무시
-            if (href === '#') {
-                e.preventDefault();
-                return;
-            }
-
-            const targetId = href.substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                e.preventDefault();
-                const navHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = targetSection.offsetTop - navHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    // ===== Smooth Scrolling (Backup for old browsers) =====
+    // Note: CSS scroll-behavior handles most of this now, but we keep this for offset adjustment if needed
+    // However, with CSS scroll-padding-top, the native anchor jump is usually correct.
+    // We will rely on CSS for the smooth scroll, but this listener ensures the mobile menu closes.
 
     // ===== Navbar Scroll Effect =====
     const navbar = document.querySelector('.navbar');
-    let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 100) {
-            navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        if (currentScroll > 50) {
+            navbar.style.boxShadow = 'var(--box-shadow)';
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
         } else {
-            navbar.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.08)';
+            navbar.style.boxShadow = 'none';
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
         }
-
-        lastScroll = currentScroll;
     });
+
+    // ===== Scroll to Top Button =====
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    if (scrollTopBtn) {
+        // Show/Hide button on scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Click event
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // ===== Form Validation =====
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            const phone = document.getElementById('phone').value;
-            const phoneRegex = /^[0-9-]+$/;
+            const phoneInput = document.getElementById('phone');
+            const phone = phoneInput.value.trim();
 
-            if (!phoneRegex.test(phone)) {
+            // Stricter Regex:
+            // - Must contain numbers
+            // - Can contain hyphens
+            // - Min length 9 (e.g. 02-123-4567)
+            // - Max length 15
+            const phoneRegex = /^[\d-]{9,15}$/;
+            // Also check if it has at least some numbers, not just hyphens
+            const hasNumbers = /\d/.test(phone);
+
+            if (!phoneRegex.test(phone) || !hasNumbers) {
                 e.preventDefault();
-                alert('올바른 전화번호 형식을 입력해주세요. (숫자와 -만 사용 가능)');
+                alert('올바른 전화번호 형식을 입력해주세요.\n예: 010-1234-5678 또는 02-123-4567');
+                phoneInput.focus();
                 return false;
             }
-
-            // 폼 제출 후 성공 메시지 (Netlify가 처리)
-            // Netlify Forms가 자동으로 리다이렉트하므로 여기서는 추가 처리 불필요
         });
     }
 
     // ===== Scroll Reveal Animation =====
     const observerOptions = {
-        threshold: 0.1,
+        threshold: 0.15,
         rootMargin: '0px 0px -50px 0px'
     };
 
@@ -100,30 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target); // Only animate once
             }
         });
     }, observerOptions);
 
-    // 애니메이션을 적용할 요소들
-    const animatedElements = document.querySelectorAll('.service-card, .info-box, .about-text');
-    animatedElements.forEach(el => {
+    const animatedElements = document.querySelectorAll('.service-card, .info-box, .about-text, .about-profile, .about-philosophy');
+    animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+        // Stagger delay for elements in the same container (simple approximation)
+        // Ideally we would do this by checking siblings, but this works generally
         observer.observe(el);
     });
-
-    // ===== 전화번호 클릭 추적 (선택사항) =====
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    phoneLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            console.log('전화 연결 시도:', this.getAttribute('href'));
-            // Google Analytics나 다른 분석 도구가 있다면 여기서 이벤트 추적
-        });
-    });
-});
-
-// ===== 스크롤 시 상단으로 버튼 (선택사항) =====
-window.addEventListener('scroll', function() {
-    // 향후 "맨 위로" 버튼 추가 시 사용 가능
 });
