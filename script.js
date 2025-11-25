@@ -25,18 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== Smooth Scrolling (Backup for old browsers) =====
-    // Note: CSS scroll-behavior handles most of this now, but we keep this for offset adjustment if needed
-    // However, with CSS scroll-padding-top, the native anchor jump is usually correct.
-    // We will rely on CSS for the smooth scroll, but this listener ensures the mobile menu closes.
-
     // ===== Navbar Scroll Effect =====
     const navbar = document.querySelector('.navbar');
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > 50) {
-            navbar.style.boxShadow = 'var(--box-shadow)';
+            navbar.style.boxShadow = 'var(--shadow-sm)';
             navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
         } else {
             navbar.style.boxShadow = 'none';
@@ -48,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollTopBtn = document.getElementById('scrollTopBtn');
 
     if (scrollTopBtn) {
-        // Show/Hide button on scroll
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
                 scrollTopBtn.classList.add('visible');
@@ -57,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Click event
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -67,19 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== Form Validation =====
-    const contactForm = document.querySelector('.contact-form');
+    // Selector updated to match the new class in index.html
+    const contactForm = document.querySelector('.modern-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             const phoneInput = document.getElementById('phone');
             const phone = phoneInput.value.trim();
 
-            // Stricter Regex:
-            // - Must contain numbers
-            // - Can contain hyphens
-            // - Min length 9 (e.g. 02-123-4567)
-            // - Max length 15
             const phoneRegex = /^[\d-]{9,15}$/;
-            // Also check if it has at least some numbers, not just hyphens
             const hasNumbers = /\d/.test(phone);
 
             if (!phoneRegex.test(phone) || !hasNumbers) {
@@ -93,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== Scroll Reveal Animation =====
     const observerOptions = {
-        threshold: 0.15,
+        threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
 
@@ -102,18 +90,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    const animatedElements = document.querySelectorAll('.service-card, .info-box, .about-text, .about-profile, .about-philosophy');
+    // Updated selectors to match new HTML structure
+    const animatedElements = document.querySelectorAll('.service-card, .contact-card, .about-wrapper, .hero-content, .value-content');
+
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-        // Stagger delay for elements in the same container (simple approximation)
-        // Ideally we would do this by checking siblings, but this works generally
         observer.observe(el);
     });
 });
