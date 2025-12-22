@@ -2,6 +2,7 @@
   publish = "."
   command = "echo 'No build command needed for static site'"
 
+# 404 처리
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -9,11 +10,6 @@
 
 [build.environment]
   NODE_VERSION = "18"
-
-# 폼 설정
-[form]
-  # 폼 제출 후 감사 페이지로 리다이렉트 (선택사항)
-  # success_page = "/thank-you.html"
 
 # 헤더 설정
 [[headers]]
@@ -33,3 +29,13 @@
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"

@@ -1,11 +1,11 @@
+# robots.txt for soobank.co.kr
+# 박종수 세무회계사무소
+
 User-agent: *
 Allow: /
 
-Sitemap: https://your-domain.netlify.app/sitemap.xml
+# Sitemap
+Sitemap: https://soobank.co.kr/sitemap.xml
 
-# 크롤링 속도 제한
-Crawl-delay: 10
-
-# 특정 경로 차단 (필요시 추가)
-# Disallow: /admin/
-# Disallow: /.netlify/
+# Crawl-delay
+Crawl-delay: 1
