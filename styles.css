@@ -29,7 +29,7 @@
     --container-width: 1140px;
     --header-height: 80px;
 
-    --font-main: 'Noto Sans KR', sans-serif;
+    --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 html {
@@ -469,6 +469,10 @@ ul {
 .profile-icon {
     width: 120px;
     height: 120px;
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 120px;
+    max-height: 120px;
     margin: 0 auto 1.5rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
@@ -476,12 +480,19 @@ ul {
     align-items: center;
     justify-content: center;
     border: 3px solid rgba(212, 175, 55, 0.5);
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .profile-icon svg {
     width: 60px;
     height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     color: var(--accent);
+    flex-shrink: 0;
 }
 
 .profile-card-content {
