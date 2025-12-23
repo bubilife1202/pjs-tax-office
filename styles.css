@@ -424,7 +424,6 @@ ul {
     padding: 100px 0;
     background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
     position: relative;
-    color: white;
 }
 
 .about::before {
@@ -447,123 +446,46 @@ ul {
     text-align: center;
 }
 
-.about-content-centered .about-title {
-    text-align: center;
-    color: white;
-}
-
-.about-content-centered .about-desc {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.about-content-centered .profile-box {
-    text-align: left;
-    max-width: 500px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.about-content-centered .profile-box h3 {
-    color: var(--accent);
-}
-
-.about-content-centered .career-list li {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.profile-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--primary);
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.profile-name {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 0.25rem;
-    letter-spacing: -0.02em;
-}
-
-.profile-title {
-    font-size: 1rem;
-    opacity: 0.8;
-    margin-bottom: 2rem;
-}
-
-.profile-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.stat-num {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--accent);
-}
-
-.stat-label {
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-.stat-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.about-title {
+.about .about-title {
     font-size: 2.5rem;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    color: var(--primary);
+    color: white;
+    text-align: center;
 }
 
-.about-desc {
-    color: var(--text-body);
+.about .about-desc {
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 2.5rem;
     font-size: 1.05rem;
+    text-align: center;
 }
 
-.profile-box {
-    background-color: var(--bg-light);
+.about .profile-box {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 2rem;
     border-radius: 16px;
 }
 
-.profile-box h3 {
+.about .profile-box h3 {
     font-size: 1.25rem;
     margin-bottom: 1rem;
-    color: var(--primary);
+    color: var(--accent);
 }
 
-.career-list li {
+.about .career-list li {
     margin-bottom: 0.5rem;
     padding-left: 1rem;
     position: relative;
-    color: var(--text-body);
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.career-list li::before {
+.about .career-list li::before {
     content: "";
     position: absolute;
     left: 0;
