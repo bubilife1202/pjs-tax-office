@@ -422,8 +422,9 @@ ul {
 /* ===== About Section ===== */
 .about {
     padding: 100px 0;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
     position: relative;
+    color: white;
 }
 
 .about::before {
@@ -433,7 +434,11 @@ ul {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+.about .section-tag {
+    color: var(--accent);
 }
 
 .about-content-centered {
@@ -444,17 +449,29 @@ ul {
 
 .about-content-centered .about-title {
     text-align: center;
+    color: white;
 }
 
 .about-content-centered .about-desc {
     text-align: center;
     margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .about-content-centered .profile-box {
     text-align: left;
     max-width: 500px;
     margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-content-centered .profile-box h3 {
+    color: var(--accent);
+}
+
+.about-content-centered .career-list li {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .profile-badge {
