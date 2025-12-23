@@ -466,33 +466,11 @@ ul {
     pointer-events: none;
 }
 
-.profile-icon {
-    width: 120px;
-    height: 120px;
-    min-width: 120px;
-    min-height: 120px;
-    max-width: 120px;
-    max-height: 120px;
-    margin: 0 auto 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid rgba(212, 175, 55, 0.5);
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.profile-icon svg {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
-    max-width: 60px;
-    max-height: 60px;
-    color: var(--accent);
-    flex-shrink: 0;
+.profile-emoji {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .profile-card-content {
