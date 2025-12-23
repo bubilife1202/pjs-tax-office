@@ -789,8 +789,18 @@ ul {
 
     .hero-trust {
         flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
         padding: 1rem 1.5rem;
         gap: 1rem;
+    }
+
+    .trust-num {
+        font-size: 1.25rem;
+    }
+
+    .trust-label {
+        font-size: 0.75rem;
     }
 
     .services-grid {
