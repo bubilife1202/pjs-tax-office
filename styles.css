@@ -402,21 +402,24 @@ ul {
 
 /* ===== Value Prop Section ===== */
 .value-prop {
-    background-color: var(--primary);
-    color: white;
+    background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
+    color: var(--primary);
     padding: 80px 0;
     text-align: center;
+    border-top: 3px solid var(--accent);
+    border-bottom: 3px solid var(--accent);
 }
 
 .value-content h2 {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+    color: var(--primary);
 }
 
 .value-content p {
     font-size: 1.1rem;
-    opacity: 0.9;
+    color: var(--text-body);
     max-width: 700px;
     margin: 0 auto;
 }
