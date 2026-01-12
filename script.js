@@ -178,4 +178,66 @@ document.addEventListener('DOMContentLoaded', function() {
     }, revealObserverOptions);
 
     generalRevealElements.forEach(el => generalObserver.observe(el));
+
+    // ===== Parallax Effect (Hero) =====
+    const parallaxLayers = document.querySelectorAll('.hero-bg-parallax');
+    
+    if (parallaxLayers.length > 0 && window.matchMedia('(min-width: 769px)').matches) {
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    // Optimization: stop animating if hero is out of view
+                    if (scrolled > 1200) {
+                        ticking = false;
+                        return;
+                    }
+                    
+                    parallaxLayers.forEach((layer, index) => {
+                        // Layer 1 (Deepest): 0.2, Layer 2: 0.4
+                        // Move DOWN relative to container to create "depth" (slower scroll speed)
+                        const speed = index === 0 ? 0.2 : 0.4;
+                        const yPos = scrolled * speed;
+                        layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                    });
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
+        });
+    }
+
+    // ===== Magnetic Button Effect =====
+    const magneticButtons = document.querySelectorAll('[data-magnetic]');
+    
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        magneticButtons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                // Max movement: 15px
+                // Calculate intensity based on distance from center? 
+                // Simple version: just divide coordinates
+                const xMove = x * 0.3;
+                const yMove = y * 0.3;
+                
+                // Disable transition for transform during movement for responsiveness
+                // But keep other transitions (color, shadow) smooth
+                btn.style.transition = 'transform 0.1s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease';
+                btn.style.transform = `translate(${xMove}px, ${yMove}px) scale(1.05)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                // Restore original transition for smooth return
+                btn.style.transition = ''; 
+                btn.style.transform = '';
+            });
+        });
+    }
 });
