@@ -472,9 +472,10 @@ button:focus-visible {
 .services {
     padding: clamp(6rem, 12vw, 10rem) 0;
     background: 
-        radial-gradient(ellipse at 30% 0%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
-        linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+        radial-gradient(ellipse at 30% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
     position: relative;
+    color: white;
 }
 
 .services::before {
@@ -498,6 +499,14 @@ button:focus-visible {
     will-change: transform, opacity;
 }
 
+.section-header .section-title {
+    color: white;
+}
+
+.section-header .section-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .section-header.reveal-visible {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -510,7 +519,7 @@ button:focus-visible {
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.03);
     padding: 2.5rem;
     border-radius: 16px;
     backdrop-filter: blur(12px);
@@ -518,9 +527,10 @@ button:focus-visible {
     transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1),
                 box-shadow 0.3s cubic-bezier(0.2, 0, 0.2, 1),
                 border-color 0.3s ease,
+                background-color 0.3s ease,
                 opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     /* Stagger animation setup */
     opacity: 0;
     transform: translateY(30px) scale(0.95);
@@ -540,15 +550,16 @@ button:focus-visible {
 
 .service-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15),
-                0 1px 3px rgba(0, 0, 0, 0.05);
-    border-color: rgba(212, 175, 55, 0.4);
-    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .service-card:hover .service-icon {
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(212, 175, 55, 0.15);
     transform: scale(1.05);
+    color: var(--accent);
 }
 
 .service-header {
@@ -560,7 +571,7 @@ button:focus-visible {
 
 .service-icon {
     font-size: 2rem;
-    background-color: var(--bg-light);
+    background-color: rgba(255, 255, 255, 0.05);
     width: 50px;
     height: 50px;
     display: flex;
@@ -568,18 +579,19 @@ button:focus-visible {
     justify-content: center;
     border-radius: 12px;
     transition: background-color 0.3s ease,
-                transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+                transform 0.3s cubic-bezier(0.2, 0, 0.2, 1),
+                color 0.3s ease;
 }
 
 .service-card h3 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--primary);
+    color: white;
     white-space: nowrap;
 }
 
 .service-desc {
-    color: var(--text-body);
+    color: rgba(255, 255, 255, 0.75);
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
     line-height: 1.6;
@@ -590,7 +602,7 @@ button:focus-visible {
     padding-left: 1.5rem;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
-    color: var(--text-body);
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .service-list li::before {
@@ -720,7 +732,9 @@ button:focus-visible {
 /* ===== Contact Section ===== */
 .contact {
     padding: clamp(6rem, 12vw, 10rem) 0;
-    background: linear-gradient(180deg, #F8FAFC 0%, #EFF3F8 100%);
+    background: 
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+        linear-gradient(180deg, #F8FAFC 0%, #EFF3F8 100%);
     position: relative;
 }
 
@@ -801,6 +815,15 @@ button:focus-visible {
     font-weight: 800;
     display: block;
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.phone-number:hover {
+    color: var(--accent-hover);
+}
+
+.contact-card.highlight .phone-number:hover {
+    color: var(--accent);
 }
 
 .location-card {
@@ -842,25 +865,30 @@ button:focus-visible {
 }
 
 .map-link-btn {
-    display: block;
-    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
     padding: 1rem 1.5rem;
-    background: var(--primary);
+    background: rgba(15, 23, 42, 0.95);
     color: white !important;
-    border-radius: 8px;
+    border-radius: 12px;
     font-weight: 600;
     font-size: 1rem;
-    text-align: center;
-    transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1),
-                background-color 0.2s ease,
-                box-shadow 0.2s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.2, 0, 0.2, 1);
     text-decoration: none;
 }
 
 .map-link-btn:hover {
-    background: var(--primary-light);
+    background: rgba(15, 23, 42, 1);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    border-color: var(--accent);
 }
 
 .map-link-btn:active {
