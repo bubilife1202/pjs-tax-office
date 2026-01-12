@@ -1,4 +1,54 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== Number Count Up Animation =====
+    const countUpElements = document.querySelectorAll('[data-count]');
+    
+    const countUpObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                animateCountUp(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    countUpElements.forEach(el => countUpObserver.observe(el));
+
+    function animateCountUp(element) {
+        const target = parseInt(element.dataset.count);
+        const suffix = element.dataset.suffix || '';
+        const useComma = element.dataset.format === 'comma';
+        const duration = 1500; // 1.5초
+        const startTime = performance.now();
+        
+        function easeOutQuart(t) {
+            return 1 - Math.pow(1 - t, 4);
+        }
+
+        function formatNumber(num) {
+            if (useComma) {
+                return num.toLocaleString('ko-KR');
+            }
+            return num.toString();
+        }
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeOutQuart(progress);
+            const currentValue = Math.floor(easedProgress * target);
+            
+            element.textContent = formatNumber(currentValue) + suffix;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                element.textContent = formatNumber(target) + suffix;
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+
     // ===== Mobile Menu Toggle =====
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -80,28 +130,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== Scroll Reveal Animation =====
-    const observerOptions = {
-        threshold: 0.1,
+    const revealObserverOptions = {
+        threshold: 0.15,
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    // Service cards - stagger effect
+    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+                // Add class to all cards when first one is visible
+                serviceCards.forEach(card => card.classList.add('reveal-visible'));
+                serviceObserver.disconnect();
             }
         });
-    }, observerOptions);
+    }, revealObserverOptions);
 
-    // Updated selectors to match new HTML structure
-    const animatedElements = document.querySelectorAll('.service-card, .contact-card, .about-wrapper, .hero-content, .value-content');
+    serviceCards.forEach(card => serviceObserver.observe(card));
 
-    animatedElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-        observer.observe(el);
-    });
+    // Contact cards - stagger effect
+    const contactCards = document.querySelectorAll('.contact-card');
+    const contactObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                contactCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('reveal-visible');
+                    }, index * 100);
+                });
+                contactObserver.disconnect();
+            }
+        });
+    }, revealObserverOptions);
+
+    contactCards.forEach(card => contactObserver.observe(card));
+
+    // General reveal for other elements
+    const generalRevealElements = document.querySelectorAll('.about-content-centered, .section-header');
+    const generalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                generalObserver.unobserve(entry.target);
+            }
+        });
+    }, revealObserverOptions);
+
+    generalRevealElements.forEach(el => generalObserver.observe(el));
 });
