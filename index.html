@@ -253,7 +253,7 @@
                 <!-- Service 1 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80" alt="기장대행 및 세무조정" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="기장대행 및 세무조정" class="service-img w-full h-full object-cover transition duration-500">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
@@ -273,7 +273,7 @@
                 <!-- Service 2 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80" alt="재산세 전문 컨설팅" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="재산세 전문 컨설팅" class="service-img w-full h-full object-cover transition duration-500">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
@@ -293,7 +293,7 @@
                 <!-- Service 3 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&q=80" alt="세무조사 및 조세불복" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" alt="세무조사 및 조세불복" class="service-img w-full h-full object-cover transition duration-500">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
@@ -313,7 +313,7 @@
                 <!-- Service 4 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="신규창업 및 법인전환" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="신규창업 및 법인전환" class="service-img w-full h-full object-cover transition duration-500">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
@@ -562,7 +562,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12">
+    <footer class="bg-slate-900 text-slate-400 py-12 pb-24 md:pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
@@ -590,7 +590,7 @@
     </footer>
 
     <!-- Mobile Sticky CTA -->
-    <div class="fixed bottom-0 left-0 right-0 bg-primary-900 text-white p-3 md:hidden z-50 shadow-lg">
+    <div class="fixed bottom-0 left-0 right-0 bg-primary-900 text-white p-3 md:hidden z-50 shadow-lg" style="padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));">
         <a href="tel:0507-1409-2268" class="flex items-center justify-center font-bold">
             <span class="material-symbols-outlined mr-2">call</span>
             0507-1409-2268 전화 상담하기
@@ -691,7 +691,12 @@
 
         // --- OpenStreetMap (Leaflet) ---
         const officeCoords = [37.7519, 128.8761]; // 강릉시 강릉대로 116
-        const map = L.map('map').setView(officeCoords, 16);
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const map = L.map('map', {
+            scrollWheelZoom: false,
+            dragging: !isMobile,
+            tap: !isMobile
+        }).setView(officeCoords, 16);
         
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
