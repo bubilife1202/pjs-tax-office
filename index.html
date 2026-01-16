@@ -130,8 +130,9 @@
 
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; }
+        .break-keep { word-break: keep-all; word-wrap: break-word; }
         .hero-gradient { 
-            background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(30, 58, 138, 0.75)), 
+            background: linear-gradient(rgba(23, 37, 84, 0.9), rgba(30, 58, 138, 0.8)), 
                         url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80'); 
             background-size: cover; 
             background-position: center; 
@@ -150,6 +151,10 @@
         .service-card:hover .service-img {
             transform: scale(1.05);
         }
+        /* Mobile Menu Animation */
+        #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .mobile-menu-open { max-height: 400px; opacity: 1; }
+        .mobile-menu-closed { max-height: 0; opacity: 0; pointer-events: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
@@ -158,53 +163,76 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-2">
-                    <span class="material-symbols-outlined text-primary-900 text-3xl">account_balance</span>
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2 group">
+                    <span class="material-symbols-outlined text-primary-900 text-3xl group-hover:scale-110 transition">account_balance</span>
                     <span class="font-bold text-xl text-slate-900 tracking-tight">박종수 세무회계사무소</span>
-                </div>
+                </a>
+
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#services" class="text-slate-600 hover:text-primary-900 font-medium transition">서비스 안내</a>
-                    <a href="#consultation" class="text-slate-600 hover:text-primary-900 font-medium transition">세무 진단</a>
-                    <a href="#calendar" class="text-slate-600 hover:text-primary-900 font-medium transition">세무 일정</a>
-                    <a href="#about" class="text-slate-600 hover:text-primary-900 font-medium transition">세무사 소개</a>
-                    <a href="#contact" class="text-slate-600 hover:text-primary-900 font-medium transition">오시는 길</a>
+                    <a href="#services" class="text-slate-600 hover:text-primary-900 font-medium transition relative hover:-translate-y-0.5">서비스 안내</a>
+                    <a href="#consultation" class="text-slate-600 hover:text-primary-900 font-medium transition relative hover:-translate-y-0.5">세무 진단</a>
+                    <a href="#calendar" class="text-slate-600 hover:text-primary-900 font-medium transition relative hover:-translate-y-0.5">세무 일정</a>
+                    <a href="#about" class="text-slate-600 hover:text-primary-900 font-medium transition relative hover:-translate-y-0.5">세무사 소개</a>
+                    <a href="#contact" class="text-slate-600 hover:text-primary-900 font-medium transition relative hover:-translate-y-0.5">오시는 길</a>
                 </div>
+
+                <!-- CTA & Mobile Button -->
                 <div class="flex items-center space-x-3">
                     <a href="tel:0507-1409-2268" class="phone-pulse flex items-center bg-primary-900 hover:bg-primary-800 text-white px-3 py-2 md:px-4 rounded-full font-bold transition shadow-lg transform hover:scale-105">
                         <span class="material-symbols-outlined md:mr-2 text-sm">call</span>
                         <span class="hidden md:inline">0507-1409-2268</span>
                     </a>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition" aria-label="메뉴 열기">
+                        <span class="material-symbols-outlined text-2xl">menu</span>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu-closed md:hidden bg-white border-t border-slate-100 overflow-hidden absolute w-full shadow-lg">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#services" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary-900 font-medium transition">서비스 안내</a>
+                <a href="#consultation" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary-900 font-medium transition">세무 진단</a>
+                <a href="#calendar" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary-900 font-medium transition">세무 일정</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary-900 font-medium transition">세무사 소개</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-primary-900 font-medium transition">오시는 길</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative hero-gradient text-white min-h-[600px] flex items-center justify-center text-center px-4 py-20">
-        <div class="max-w-4xl animate-fade-in-up">
-            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+    <header class="relative hero-gradient text-white min-h-[600px] flex items-center justify-center text-center px-4 py-20 overflow-hidden">
+        <div class="max-w-4xl animate-fade-in-up relative z-10">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight break-keep drop-shadow-lg">
                 복잡한 세금 고민,<br>
                 <span class="text-blue-300">박종수 세무사</span>가 해결해 드립니다.
             </h1>
-            <p class="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto font-light">
+            <p class="text-lg md:text-xl text-blue-50 mb-10 max-w-2xl mx-auto font-light break-keep leading-relaxed drop-shadow-md">
                 대표님은 사업 성장에만 집중하세요.<br class="hidden md:inline">
                 <strong>확실한 절세 솔루션</strong>으로 세금 부담을 줄여드립니다.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8 md:mb-0">
-                <a href="tel:0507-1409-2268" class="flex items-center justify-center bg-white text-primary-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition shadow-xl w-full sm:w-auto">
+                <a href="tel:0507-1409-2268" class="flex items-center justify-center bg-white text-primary-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition shadow-xl w-full sm:w-auto transform hover:-translate-y-1">
                     <span class="material-symbols-outlined mr-2">phone_in_talk</span>
                     전화 상담 연결
                 </a>
-                <a href="#consultation" class="flex items-center justify-center bg-primary-700/60 backdrop-blur text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-700/80 transition w-full sm:w-auto">
+                <a href="#consultation" class="flex items-center justify-center bg-primary-700/60 backdrop-blur text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-700/80 transition w-full sm:w-auto transform hover:-translate-y-1">
                     <span class="material-symbols-outlined mr-2">quiz</span>
                     내게 필요한 세무 서비스 찾기
                 </a>
             </div>
-            <p class="mt-6 md:mt-6 text-sm text-blue-200 opacity-80">
-                <span class="material-symbols-outlined text-xs align-middle mr-1">schedule</span>
+            <p class="mt-8 md:mt-10 text-sm text-blue-200/90 font-medium">
+                <span class="material-symbols-outlined text-sm align-middle mr-1">schedule</span>
                 평일 09:00 - 18:00 (점심시간 12:00 - 13:00)
             </p>
         </div>
+        
+        <!-- Decorative elements -->
+        <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent"></div>
     </header>
 
     <!-- Main Content -->
@@ -212,31 +240,31 @@
         
         <!-- Trust Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
-                <div class="bg-blue-50 p-3 rounded-xl mr-5 text-primary-900">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
+                <div class="bg-blue-50 p-3 rounded-xl mr-5 text-primary-900 shrink-0">
                     <span class="material-symbols-outlined text-3xl">workspace_premium</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">30년+ 경력</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">수많은 세무 사례를 경험한 노하우로 최적의 절세 방안을 제시합니다.</p>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">30년+ 경력</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep">수많은 세무 사례를 경험한 노하우로 최적의 절세 방안을 제시합니다.</p>
                 </div>
             </div>
-            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
-                <div class="bg-indigo-50 p-3 rounded-xl mr-5 text-indigo-900">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
+                <div class="bg-indigo-50 p-3 rounded-xl mr-5 text-indigo-900 shrink-0">
                     <span class="material-symbols-outlined text-3xl">groups</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">1,000건+ 상담</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">다양한 업종의 세무 문제를 해결한 풍부한 상담 경험을 보유하고 있습니다.</p>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">1,000건+ 상담</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep">다양한 업종의 세무 문제를 해결한 풍부한 상담 경험을 보유하고 있습니다.</p>
                 </div>
             </div>
-            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
-                <div class="bg-sky-50 p-3 rounded-xl mr-5 text-sky-900">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
+                <div class="bg-sky-50 p-3 rounded-xl mr-5 text-sky-900 shrink-0">
                     <span class="material-symbols-outlined text-3xl">location_on</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">강릉 20년 밀착</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">강릉 지역 사업자분들과 함께 성장해온 든든한 세무 파트너입니다.</p>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">강릉 20년 밀착</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep">강릉 지역 사업자분들과 함께 성장해온 든든한 세무 파트너입니다.</p>
                 </div>
             </div>
         </div>
@@ -599,6 +627,22 @@
 
     <!-- Scripts -->
     <script>
+        // --- Mobile Menu Logic ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.querySelector('#mobile-menu-btn span');
+            
+            if (menu.classList.contains('mobile-menu-closed')) {
+                menu.classList.remove('mobile-menu-closed');
+                menu.classList.add('mobile-menu-open');
+                icon.textContent = 'close';
+            } else {
+                menu.classList.add('mobile-menu-closed');
+                menu.classList.remove('mobile-menu-open');
+                icon.textContent = 'menu';
+            }
+        }
+
         // --- Wizard Logic ---
         const wizardData = {
             individual: {
@@ -638,12 +682,21 @@
                 wizardData[selection].options.forEach((opt, index) => {
                     const btn = document.createElement('button');
                     btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 hover:border-primary-500 hover:bg-blue-50 transition flex justify-between items-center group";
-                    btn.innerHTML = `<span class="font-medium text-slate-700 group-hover:text-primary-700">${opt.text}</span><span class="material-symbols-outlined text-slate-300 group-hover:text-primary-500">arrow_forward_ios</span>`;
+                    btn.innerHTML = `<span class="font-medium text-slate-700 group-hover:text-primary-700 break-keep">${opt.text}</span><span class="material-symbols-outlined text-slate-300 group-hover:text-primary-500">arrow_forward_ios</span>`;
                     btn.onclick = () => showResult(index);
                     optionsContainer.appendChild(btn);
                 });
 
                 document.getElementById('wizard-step-2').classList.remove('hidden');
+                // Scroll to top of wizard to ensure visibility on mobile
+                const wizardSection = document.getElementById('consultation');
+                const offset = 80; // height of sticky nav
+                const elementPosition = wizardSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         }
 
@@ -656,12 +709,30 @@
             document.getElementById('result-keyword').textContent = data.keyword;
             
             document.getElementById('wizard-step-3').classList.remove('hidden');
+            
+            const wizardSection = document.getElementById('consultation');
+            const offset = 80;
+            const elementPosition = wizardSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
         }
 
         function resetWizard() {
             document.getElementById('wizard-step-2').classList.add('hidden');
             document.getElementById('wizard-step-3').classList.add('hidden');
             document.getElementById('wizard-step-1').classList.remove('hidden');
+            
+            const wizardSection = document.getElementById('consultation');
+            const offset = 80;
+            const elementPosition = wizardSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
         }
 
         // --- Calendar Tab Logic ---
@@ -682,9 +753,19 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    const offset = 80; // Sticky nav height
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
                 }
             });
         });
