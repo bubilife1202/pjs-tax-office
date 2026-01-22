@@ -148,6 +148,13 @@
             70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
             100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-in-up { animation: none; opacity: 1; transform: none; }
+            .phone-pulse { animation: none; }
+            .service-card:hover .service-img { transform: none; }
+            * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        }
         .service-card:hover .service-img {
             transform: scale(1.05);
         }
@@ -165,7 +172,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="#" class="flex items-center space-x-2 group">
-                    <span class="material-symbols-outlined text-primary-900 text-3xl group-hover:scale-110 transition">account_balance</span>
+                    <span class="material-symbols-outlined text-primary-900 text-3xl group-hover:scale-110 transition" aria-hidden="true">account_balance</span>
                     <span class="font-bold text-xl text-slate-900 tracking-tight">박종수 세무회계사무소</span>
                 </a>
 
@@ -181,12 +188,12 @@
                 <!-- CTA & Mobile Button -->
                 <div class="flex items-center space-x-3">
                     <a href="tel:0507-1409-2268" class="phone-pulse flex items-center bg-primary-900 hover:bg-primary-800 text-white px-3 py-2 md:px-4 rounded-full font-bold transition shadow-lg transform hover:scale-105">
-                        <span class="material-symbols-outlined md:mr-2 text-sm">call</span>
+                        <span class="material-symbols-outlined md:mr-2 text-sm" aria-hidden="true">call</span>
                         <span class="hidden md:inline">0507-1409-2268</span>
                     </a>
                     <!-- Mobile Menu Button -->
                     <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition" aria-label="메뉴 열기">
-                        <span class="material-symbols-outlined text-2xl">menu</span>
+                        <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
                     </button>
                 </div>
             </div>
@@ -217,16 +224,16 @@
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8 md:mb-0">
                 <a href="tel:0507-1409-2268" class="flex items-center justify-center bg-white text-primary-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition shadow-xl w-full sm:w-auto transform hover:-translate-y-1">
-                    <span class="material-symbols-outlined mr-2">phone_in_talk</span>
+                    <span class="material-symbols-outlined mr-2" aria-hidden="true">phone_in_talk</span>
                     전화 상담 연결
                 </a>
                 <a href="#consultation" class="flex items-center justify-center bg-primary-700/60 backdrop-blur text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-700/80 transition w-full sm:w-auto transform hover:-translate-y-1">
-                    <span class="material-symbols-outlined mr-2">quiz</span>
+                    <span class="material-symbols-outlined mr-2" aria-hidden="true">quiz</span>
                     내게 필요한 세무 서비스 찾기
                 </a>
             </div>
             <p class="mt-8 md:mt-10 text-sm text-blue-200/90 font-medium">
-                <span class="material-symbols-outlined text-sm align-middle mr-1">schedule</span>
+                <span class="material-symbols-outlined text-sm align-middle mr-1" aria-hidden="true">schedule</span>
                 평일 09:00 - 18:00 (점심시간 12:00 - 13:00)
             </p>
         </div>
@@ -242,7 +249,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
                 <div class="bg-blue-50 p-3 rounded-xl mr-5 text-primary-900 shrink-0">
-                    <span class="material-symbols-outlined text-3xl">workspace_premium</span>
+                    <span class="material-symbols-outlined text-3xl" aria-hidden="true">workspace_premium</span>
                 </div>
                 <div>
                     <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">30년+ 경력</h3>
@@ -251,7 +258,7 @@
             </div>
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
                 <div class="bg-indigo-50 p-3 rounded-xl mr-5 text-indigo-900 shrink-0">
-                    <span class="material-symbols-outlined text-3xl">groups</span>
+                    <span class="material-symbols-outlined text-3xl" aria-hidden="true">groups</span>
                 </div>
                 <div>
                     <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">1,000건+ 상담</h3>
@@ -260,7 +267,7 @@
             </div>
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 flex items-start hover:shadow-xl transition duration-300">
                 <div class="bg-sky-50 p-3 rounded-xl mr-5 text-sky-900 shrink-0">
-                    <span class="material-symbols-outlined text-3xl">location_on</span>
+                    <span class="material-symbols-outlined text-3xl" aria-hidden="true">location_on</span>
                 </div>
                 <div>
                     <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">강릉 20년 밀착</h3>
@@ -281,19 +288,19 @@
                 <!-- Service 1 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="기장대행 및 세무조정" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="기장대행 및 세무조정" class="service-img w-full h-full object-cover transition duration-500" width="800" height="533" loading="lazy">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
-                            <span class="material-symbols-outlined mr-2 text-primary-600">description</span>
+                            <span class="material-symbols-outlined mr-2 text-primary-600" aria-hidden="true">description</span>
                             기장대행 & 세무조정
                         </h4>
                         <p class="text-slate-600 text-sm mb-3">
                             꼼꼼한 장부 작성으로 비용 처리 극대화, 가산세 걱정 없는 편안함을 드립니다.
                         </p>
                         <ul class="text-xs text-slate-500 space-y-1">
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>법인/개인 복식부기</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>인건비 신고 & 4대보험</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>법인/개인 복식부기</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>인건비 신고 & 4대보험</li>
                         </ul>
                     </div>
                 </div>
@@ -301,19 +308,19 @@
                 <!-- Service 2 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="재산세 전문 컨설팅" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="재산세 전문 컨설팅" class="service-img w-full h-full object-cover transition duration-500" width="800" height="533" loading="lazy">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
-                            <span class="material-symbols-outlined mr-2 text-primary-600">home_work</span>
+                            <span class="material-symbols-outlined mr-2 text-primary-600" aria-hidden="true">home_work</span>
                             재산세 전문 컨설팅
                         </h4>
                         <p class="text-slate-600 text-sm mb-3">
                             양도, 상속, 증여는 타이밍과 전략입니다. 최적의 절세 플랜을 설계합니다.
                         </p>
                         <ul class="text-xs text-slate-500 space-y-1">
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>비과세/감면 검토</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>자금출처 조사 대비</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>비과세/감면 검토</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>자금출처 조사 대비</li>
                         </ul>
                     </div>
                 </div>
@@ -321,19 +328,19 @@
                 <!-- Service 3 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" alt="세무조사 및 조세불복" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" alt="세무조사 및 조세불복" class="service-img w-full h-full object-cover transition duration-500" width="800" height="533" loading="lazy">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
-                            <span class="material-symbols-outlined mr-2 text-primary-600">gavel</span>
+                            <span class="material-symbols-outlined mr-2 text-primary-600" aria-hidden="true">gavel</span>
                             세무조사 & 조세불복
                         </h4>
                         <p class="text-slate-600 text-sm mb-3">
                             억울한 세금, 정당한 권리를 찾아드립니다. 납세자 권익을 철저히 보호합니다.
                         </p>
                         <ul class="text-xs text-slate-500 space-y-1">
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>사전 리스크 진단</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>심판청구 대행</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>사전 리스크 진단</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>심판청구 대행</li>
                         </ul>
                     </div>
                 </div>
@@ -341,19 +348,19 @@
                 <!-- Service 4 -->
                 <div class="service-card group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition border border-slate-100">
                     <div class="h-40 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="신규창업 및 법인전환" class="service-img w-full h-full object-cover transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="신규창업 및 법인전환" class="service-img w-full h-full object-cover transition duration-500" width="800" height="533" loading="lazy">
                     </div>
                     <div class="p-5">
                         <h4 class="font-bold text-lg text-slate-900 mb-2 flex items-center">
-                            <span class="material-symbols-outlined mr-2 text-primary-600">rocket_launch</span>
+                            <span class="material-symbols-outlined mr-2 text-primary-600" aria-hidden="true">rocket_launch</span>
                             신규창업 & 법인전환
                         </h4>
                         <p class="text-slate-600 text-sm mb-3">
                             첫 단추를 잘 꿰어야 합니다. 사업 생애주기에 맞춘 로드맵을 그려드립니다.
                         </p>
                         <ul class="text-xs text-slate-500 space-y-1">
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>사업자등록 대행</li>
-                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1">check_circle</span>창업 세액감면 검토</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>사업자등록 대행</li>
+                            <li class="flex items-center"><span class="material-symbols-outlined text-green-500 text-sm mr-1" aria-hidden="true">check_circle</span>창업 세액감면 검토</li>
                         </ul>
                     </div>
                 </div>
@@ -371,9 +378,9 @@
                         <h3 class="text-3xl font-bold mb-4">나에게 딱 맞는<br>세무 서비스는?</h3>
                         <p class="text-blue-200 mb-8 text-lg">간단한 질문에 답하고<br>최적의 세무 솔루션을 확인해보세요.</p>
                         <div class="flex items-center space-x-4 text-sm text-blue-300">
-                            <div class="flex items-center"><span class="material-symbols-outlined mr-1 text-lg">timer</span> 1분 소요</div>
+                            <div class="flex items-center"><span class="material-symbols-outlined mr-1 text-lg" aria-hidden="true">timer</span> 1분 소요</div>
                             <div class="w-px h-4 bg-blue-700"></div>
-                            <div class="flex items-center"><span class="material-symbols-outlined mr-1 text-lg">check_circle</span> 맞춤 추천</div>
+                            <div class="flex items-center"><span class="material-symbols-outlined mr-1 text-lg" aria-hidden="true">check_circle</span> 맞춤 추천</div>
                         </div>
                     </div>
 
@@ -409,7 +416,7 @@
                         <!-- Wizard Step 3 (Result) -->
                         <div id="wizard-step-3" class="wizard-step text-center animate-fade-in-up hidden" role="status" aria-live="polite" aria-labelledby="wizard-result-heading">
                             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
-                                <span class="material-symbols-outlined text-green-600 text-3xl">recommend</span>
+                                <span class="material-symbols-outlined text-green-600 text-3xl" aria-hidden="true">recommend</span>
                             </div>
                             <h4 id="wizard-result-heading" class="text-2xl font-bold text-slate-900 mb-2">추천 서비스: <span id="result-title" class="text-primary-700"></span></h4>
                             <p id="result-desc" class="text-slate-600 mb-8 text-sm leading-relaxed"></p>
@@ -421,7 +428,7 @@
                             </div>
 
                             <a href="tel:0507-1409-2268" class="block w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1">
-                                <span class="material-symbols-outlined align-middle mr-2">call</span> 0507-1409-2268 전화 연결
+                                <span class="material-symbols-outlined align-middle mr-2" aria-hidden="true">call</span> 0507-1409-2268 전화 연결
                             </a>
                             <button onclick="resetWizard()" class="mt-4 text-sm text-slate-400 hover:text-slate-600">다시 하기</button>
                         </div>
@@ -433,7 +440,7 @@
         <!-- Tax Calendar -->
         <section id="calendar" class="mb-24 scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-                <span class="material-symbols-outlined mr-3 text-primary-600 text-3xl">calendar_month</span>
+                <span class="material-symbols-outlined mr-3 text-primary-600 text-3xl" aria-hidden="true">calendar_month</span>
                 주요 세무 일정
             </h2>
             <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
@@ -527,15 +534,15 @@
                         <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
                             <h4 class="font-bold text-lg text-slate-900 mb-4">대표 세무사 박종수</h4>
                             <ul class="space-y-2 text-sm text-slate-600">
-                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg">check</span>30년 이상 세무 실무 경력</li>
-                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg">check</span>강릉 지역 기업·개인 세무 전담</li>
-                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg">check</span>양도세·상속세·증여세 절세 설계</li>
-                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg">check</span>소상공인부터 중소기업까지 세무 지원</li>
+                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg" aria-hidden="true">check</span>30년 이상 세무 실무 경력</li>
+                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg" aria-hidden="true">check</span>강릉 지역 기업·개인 세무 전담</li>
+                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg" aria-hidden="true">check</span>양도세·상속세·증여세 절세 설계</li>
+                                <li class="flex items-center"><span class="material-symbols-outlined text-primary-600 mr-2 text-lg" aria-hidden="true">check</span>소상공인부터 중소기업까지 세무 지원</li>
                             </ul>
                         </div>
                     </div>
                     <div class="relative h-64 lg:h-auto">
-                        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=800&q=80" alt="세무 상담" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=800&q=80" alt="세무 상담" class="w-full h-full object-cover" width="800" height="533" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-primary-900/30 to-transparent"></div>
                     </div>
                 </div>
@@ -545,7 +552,7 @@
         <!-- Contact Section -->
         <section id="contact" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-                <span class="material-symbols-outlined mr-3 text-primary-600 text-3xl">location_on</span>
+                <span class="material-symbols-outlined mr-3 text-primary-600 text-3xl" aria-hidden="true">location_on</span>
                 오시는 길
             </h2>
             <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
@@ -561,25 +568,25 @@
                             <h3 class="text-xl font-bold text-slate-900 mb-4">박종수 세무회계사무소</h3>
                             <div class="space-y-3 text-sm text-slate-600">
                                 <div class="flex items-start">
-                                    <span class="material-symbols-outlined mr-3 text-primary-600">location_on</span>
+                                    <span class="material-symbols-outlined mr-3 text-primary-600" aria-hidden="true">location_on</span>
                                     <span>강원특별자치도 강릉시<br>강릉대로 116, 3층</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="material-symbols-outlined mr-3 text-primary-600">call</span>
+                                    <span class="material-symbols-outlined mr-3 text-primary-600" aria-hidden="true">call</span>
                                     <span class="font-bold text-slate-900">0507-1409-2268</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="material-symbols-outlined mr-3 text-primary-600">schedule</span>
+                                    <span class="material-symbols-outlined mr-3 text-primary-600" aria-hidden="true">schedule</span>
                                     <span>평일 09:00 - 18:00<br>(점심 12:00 - 13:00 / 주말 휴무)</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="material-symbols-outlined mr-3 text-primary-600">directions_car</span>
+                                    <span class="material-symbols-outlined mr-3 text-primary-600" aria-hidden="true">directions_car</span>
                                     <span>강릉역에서 차량 10분</span>
                                 </div>
                             </div>
                         </div>
                         <a href="tel:0507-1409-2268" class="w-full bg-primary-900 text-white py-4 px-4 rounded-xl font-bold text-center hover:bg-primary-800 transition flex items-center justify-center">
-                            <span class="material-symbols-outlined mr-2">phone_forwarded</span>
+                            <span class="material-symbols-outlined mr-2" aria-hidden="true">phone_forwarded</span>
                             전화 상담하기
                         </a>
                     </div>
@@ -595,7 +602,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <span class="material-symbols-outlined text-white text-2xl">account_balance</span>
+                        <span class="material-symbols-outlined text-white text-2xl" aria-hidden="true">account_balance</span>
                         <h5 class="text-white font-bold text-lg">박종수 세무회계사무소</h5>
                     </div>
                     <p class="text-sm mb-2">대표 세무사: 박종수</p>
@@ -605,7 +612,7 @@
                 </div>
                 <div class="flex flex-col items-start md:items-end justify-center">
                     <a href="tel:0507-1409-2268" class="flex items-center text-white hover:text-blue-300 transition text-lg font-bold mb-2">
-                        <span class="material-symbols-outlined mr-2">call</span>
+                        <span class="material-symbols-outlined mr-2" aria-hidden="true">call</span>
                         0507-1409-2268
                     </a>
                     <p class="text-sm text-slate-500">평일 09:00 - 18:00</p>
@@ -620,7 +627,7 @@
     <!-- Mobile Sticky CTA -->
     <div class="fixed bottom-0 left-0 right-0 bg-primary-900 text-white p-3 md:hidden z-50 shadow-lg" style="padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));">
         <a href="tel:0507-1409-2268" class="flex items-center justify-center font-bold">
-            <span class="material-symbols-outlined mr-2">call</span>
+            <span class="material-symbols-outlined mr-2" aria-hidden="true">call</span>
             0507-1409-2268 전화 상담하기
         </a>
     </div>
@@ -682,7 +689,7 @@
                 wizardData[selection].options.forEach((opt, index) => {
                     const btn = document.createElement('button');
                     btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 hover:border-primary-500 hover:bg-blue-50 transition flex justify-between items-center group";
-                    btn.innerHTML = `<span class="font-medium text-slate-700 group-hover:text-primary-700 break-keep">${opt.text}</span><span class="material-symbols-outlined text-slate-300 group-hover:text-primary-500">arrow_forward_ios</span>`;
+                    btn.innerHTML = `<span class="font-medium text-slate-700 group-hover:text-primary-700 break-keep">${opt.text}</span><span class="material-symbols-outlined text-slate-300 group-hover:text-primary-500" aria-hidden="true">arrow_forward_ios</span>`;
                     btn.onclick = () => showResult(index);
                     optionsContainer.appendChild(btn);
                 });
