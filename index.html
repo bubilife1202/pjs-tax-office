@@ -252,7 +252,7 @@
                     <span class="material-symbols-outlined text-3xl" aria-hidden="true">workspace_premium</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">30년+ 경력</h3>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep"><span class="counter" data-target="30">0</span>년+ 경력</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep">수많은 세무 사례를 경험한 노하우로 최적의 절세 방안을 제시합니다.</p>
                 </div>
             </div>
@@ -261,7 +261,7 @@
                     <span class="material-symbols-outlined text-3xl" aria-hidden="true">groups</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">1,000건+ 상담</h3>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep"><span class="counter" data-target="1000">0</span>건+ 상담</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep">다양한 업종의 세무 문제를 해결한 풍부한 상담 경험을 보유하고 있습니다.</p>
                 </div>
             </div>
@@ -270,7 +270,7 @@
                     <span class="material-symbols-outlined text-3xl" aria-hidden="true">location_on</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">강릉 20년 밀착</h3>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2 break-keep">강릉 <span class="counter" data-target="20">0</span>년 밀착</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep">강릉 지역 사업자분들과 함께 성장해온 든든한 세무 파트너입니다.</p>
                 </div>
             </div>
@@ -799,6 +799,38 @@
                 <a href="tel:0507-1409-2268" style="display:inline-block; margin-top:8px; background:#1e3a8a; color:white; padding:6px 12px; border-radius:6px; text-decoration:none; font-size:12px;">📞 전화 걸기</a>
             </div>
         `).openPopup();
+
+        // --- Counter Animation ---
+        const counters = document.querySelectorAll('.counter');
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.ceil(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target.toLocaleString();
+                }
+            };
+            updateCounter();
+        };
+
+        // Intersection Observer for counters
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    animateCounter(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
     </script>
 </body>
 </html>
